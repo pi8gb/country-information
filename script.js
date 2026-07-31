@@ -64,7 +64,7 @@ search_button.addEventListener("click", async function () {
     country_etymology.textContent = "ETYMOLOGY: " + data.data.government.country_name.value.etymology.string;
     country_area_rank.textContent = "AREA RANK: " + data.data.geography.area.value.total.rank;
     country_population_rank.textContent = "POPULATION RANK: " + data.data.people_and_society.population.value.total.rank;
-    country_life_expectancy_rank.textContent = "LIFE EXPECTANCY RATE: " + data.data.people_and_society.life_expectancy_at_birth.value.total.rank;
+    country_life_expectancy_rank.textContent = "LIFE EXPECTANCY RANK: " + data.data.people_and_society.life_expectancy_at_birth.value.total.rank;
     country_adult_obesity_rank.textContent = "ADULT OBESITY RANK: " + data.data.people_and_society.obesity_adult_prevalence_rate.value.rank;
     country_adult_obesity.textContent = "ADULT OBESITY: " + data.data.people_and_society.obesity_adult_prevalence_rate.value.percent + "%";
 });
