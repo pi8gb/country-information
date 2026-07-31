@@ -23,6 +23,13 @@ let country_median_age = document.getElementById("median_age");
 let country_major_cities = document.getElementById("major_cities");
 let country_life_expectancy = document.getElementById("life_expectancy");
 let country_tobacco_use = document.getElementById("tobacco_use");
+let country_native_name = document.getElementById("native_name");
+let country_etymology = document.getElementById("etymology");
+let country_area_rank = document.getElementById("area_rank");
+let country_population_rank = document.getElementById("population_rank");
+let country_life_expectancy_rank = document.getElementById("life_expectancy_rank");
+let country_adult_obesity_rank = document.getElementById("adult_obesity_rank");
+let country_adult_obesity = document.getElementById("adult_obesity");
 
 search_button.addEventListener("click", async function () {
     let term = search_input.value.trim().toLowerCase().replaceAll(" ", "-");
@@ -32,6 +39,7 @@ search_button.addEventListener("click", async function () {
     country_introduction.textContent = data.data.introduction.background.value.string;
     country_name.textContent = "COMMON NAME: " + data.data.identity.names.common;
     country_official_name.textContent = "OFFICIAL NAME: " + data.data.identity.names.official;
+    country_native_name.textContent = "NATIVE NAME: " + data.data.identity.names.native;
     country_flag_description.textContent = "FLAG DESCRIPTION: " + data.data.government.flag.value.description.string;
     country_capital.textContent = "CAPITAL: " + data.data.government.capital.value.name.string;
     country_region.textContent = "REGION: " + data.data.identity.classification.region;
@@ -39,17 +47,24 @@ search_button.addEventListener("click", async function () {
     country_currency.textContent = "CURRENCY SYMBOL: " + data.data.identity.currency.symbol;
     country_time_difference.textContent = "TIME DIFFERENCE: " + data.data.government.capital.value.time_difference.string;
     country_calling_code.textContent = "CALLING CODE: " + data.data.identity.communication.calling_code;
-    //languages
+    let languages = data.data.people_and_society.languages.value.map(language => language.label).join(", ");
+    country_languages.textContent = `LANGUAGES: ${languages}`;
     country_location.textContent = "LOCATION: " + data.data.geography.location.value.string;
     country_area.textContent = "AREA: " + data.data.geography.area.value.total.measurement + data.data.geography.area.value.total.unit;
     country_climate.textContent = "CLIMATE: " + data.data.geography.climate.value.string;
     country_terrain.textContent = "TERRAIN: " + data.data.geography.terrain.value.string;
     country_highest_point.textContent = "HIGHEST POINT: " + data.data.geography.elevation.value.highest_point.value.measurement + data.data.geography.elevation.value.highest_point.value.unit;
-    //bordering countries
+    let borderCountries = data.data.geography.land_boundaries.border_countries.value.map(border => border.country).join(", ");
+    country_bording_countries.textContent = `BORDERING COUNTRIES: ${borderCountries}`;
     country_population.textContent = "POPULATION: " + data.data.people_and_society.population.value.total.number + " (Year: " + data.data.people_and_society.population.value.total.date.year + ")";
     country_population_distribution.textContent = "POPULATION DISTRIBUTION: " + data.data.people_and_society.population_distribution.value.string;
     country_median_age.textContent = "MEDIAN AGE: " + data.data.people_and_society.median_age.value.total.number;
-    //major cities
     country_life_expectancy.textContent = "LIFE EXPECTANCY: " + data.data.people_and_society.life_expectancy_at_birth.value.total.number;
     country_tobacco_use.textContent = "TOBACCO USE: " + data.data.people_and_society.tobacco_use.value.total.percent + "%";
+    country_etymology.textContent = "ETYMOLOGY: " + data.data.government.country_name.value.etymology.string;
+    country_area_rank.textContent = "AREA RANK: " + data.data.geography.area.value.total.rank;
+    country_population_rank.textContent = "POPULATION RANK: " + data.data.people_and_society.population.value.total.rank;
+    country_life_expectancy_rank.textContent = "LIFE EXPECTANCY RATE: " + data.data.people_and_society.life_expectancy_at_birth.value.total.rank;
+    country_adult_obesity_rank.textContent = "ADULT OBESITY RANK: " + data.data.people_and_society.obesity_adult_prevalence_rate.value.rank;
+    country_adult_obesity.textContent = "ADULT OBESITY: " + data.data.people_and_society.obesity_adult_prevalence_rate.value.percent + "%";
 });
