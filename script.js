@@ -25,10 +25,9 @@ let country_life_expectancy = document.getElementById("life_expectancy");
 let country_tobacco_use = document.getElementById("tobacco_use");
 
 search_button.addEventListener("click", async function () {
-    let term = search_input.value.trim().toLowerCase();
-    const response = await fetch(`https://countries.altoal.com/api/v1/name/${encodeURIComponent(term)}.json`);
+    let term = search_input.value.trim().toLowerCase().replaceAll(" ", "-");
+    const response = await fetch(`https://countries.altoal.com/api/v1/name/${term}.json`);
     const data = await response.json();
-    console.log(`https://countries.altoal.com/api/v1/name/${encodeURIComponent(term)}.json`);
 
     country_introduction.textContent = data.data.introduction.background.value.string;
     country_name.textContent = "COMMON NAME: " + data.data.identity.names.common;
